@@ -1,0 +1,154 @@
+<svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g2a" cx="50%" cy="15%" r="60%">
+      <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2b" cx="20%" cy="80%" r="35%">
+      <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="600" height="380" fill="#080705"/>
+  <rect width="600" height="380" fill="url(#g2a)"/>
+  <rect width="600" height="380" fill="url(#g2b)"/>
+
+  <!-- Ceiling -->
+  <line x1="0" y1="30" x2="600" y2="30" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.28"/>
+  <!-- Floor -->
+  <line x1="0" y1="300" x2="600" y2="300" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.28"/>
+
+  <!-- Back wall tiles (subtle grid) -->
+  <line x1="0" y1="132" x2="600" y2="132" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.09"/>
+  <line x1="0" y1="112" x2="600" y2="112" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="0" y1="92" x2="600" y2="92" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="0" y1="72" x2="600" y2="72" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="0" y1="52" x2="600" y2="52" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <!-- Vertical tile lines -->
+  <line x1="60" y1="33" x2="60" y2="135" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="120" y1="33" x2="120" y2="135" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="180" y1="33" x2="180" y2="135" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="240" y1="33" x2="240" y2="135" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="300" y1="33" x2="300" y2="135" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="360" y1="33" x2="360" y2="135" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="420" y1="33" x2="420" y2="135" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="480" y1="33" x2="480" y2="135" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="540" y1="33" x2="540" y2="135" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+
+  <!-- Upper cabinets (wall-hung) -->
+  <rect x="0" y="33" width="600" height="100" fill="#c9a96e" fill-opacity="0.03" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.3"/>
+  <!-- Cabinet doors dividers -->
+  <line x1="100" y1="33" x2="100" y2="133" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.2"/>
+  <line x1="200" y1="33" x2="200" y2="133" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.2"/>
+  <line x1="300" y1="33" x2="300" y2="133" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.2"/>
+  <line x1="400" y1="33" x2="400" y2="133" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.2"/>
+  <line x1="500" y1="33" x2="500" y2="133" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.2"/>
+  <!-- Cabinet handles -->
+  <line x1="46" y1="83" x2="54" y2="83" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.35"/>
+  <line x1="146" y1="83" x2="154" y2="83" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.35"/>
+  <line x1="246" y1="83" x2="254" y2="83" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.35"/>
+  <line x1="346" y1="83" x2="354" y2="83" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.35"/>
+  <line x1="446" y1="83" x2="454" y2="83" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.35"/>
+  <line x1="546" y1="83" x2="554" y2="83" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.35"/>
+
+  <!-- Range hood over cooktop -->
+  <path d="M 255 135 L 245 165 L 355 165 L 345 135 Z" fill="#c9a96e" fill-opacity="0.04" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.3"/>
+  <rect x="248" y="158" width="104" height="10" rx="1" fill="#c9a96e" fill-opacity="0.06" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.25"/>
+  <!-- Hood vent slats -->
+  <line x1="258" y1="145" x2="342" y2="145" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.14"/>
+  <line x1="258" y1="152" x2="342" y2="152" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.14"/>
+
+  <!-- Main counter (lower cabinets + countertop) -->
+  <!-- Left lower cabinets -->
+  <rect x="0" y="190" width="240" height="110" fill="#c9a96e" fill-opacity="0.035" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.3"/>
+  <!-- Countertop slab (left) -->
+  <rect x="0" y="180" width="248" height="16" rx="1" fill="#c9a96e" fill-opacity="0.06" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.35"/>
+  <!-- Cabinet door dividers (left) -->
+  <line x1="80" y1="190" x2="80" y2="300" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.18"/>
+  <line x1="160" y1="190" x2="160" y2="300" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.18"/>
+  <!-- Handles (left) -->
+  <line x1="36" y1="244" x2="36" y2="254" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.32"/>
+  <line x1="116" y1="244" x2="116" y2="254" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.32"/>
+  <line x1="196" y1="244" x2="196" y2="254" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.32"/>
+
+  <!-- Cooktop on left counter -->
+  <rect x="260" y="182" width="80" height="12" rx="1" fill="#c9a96e" fill-opacity="0.05" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.28"/>
+  <!-- Burner circles -->
+  <circle cx="278" cy="177" r="9" fill="none" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <circle cx="278" cy="177" r="5" fill="none" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.18"/>
+  <circle cx="302" cy="177" r="9" fill="none" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <circle cx="302" cy="177" r="5" fill="none" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.18"/>
+  <circle cx="326" cy="177" r="7" fill="none" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <circle cx="350" cy="177" r="7" fill="none" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+
+  <!-- Sink area -->
+  <rect x="360" y="185" width="80" height="22" rx="1" fill="none" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.28"/>
+  <line x1="398" y1="185" x2="398" y2="207" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.16"/>
+  <!-- Tap -->
+  <line x1="400" y1="175" x2="400" y2="185" stroke="#c9a96e" stroke-width="0.9" stroke-opacity="0.25"/>
+  <line x1="396" y1="175" x2="404" y2="175" stroke="#c9a96e" stroke-width="0.9" stroke-opacity="0.25"/>
+
+  <!-- Right lower cabinets -->
+  <rect x="448" y="190" width="152" height="110" fill="#c9a96e" fill-opacity="0.035" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.3"/>
+  <rect x="444" y="180" width="156" height="16" rx="1" fill="#c9a96e" fill-opacity="0.06" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.35"/>
+  <line x1="524" y1="190" x2="524" y2="300" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.18"/>
+  <line x1="482" y1="244" x2="482" y2="254" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.32"/>
+  <line x1="560" y1="244" x2="560" y2="254" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.32"/>
+
+  <!-- Kitchen island / peninsula -->
+  <rect x="130" y="248" width="290" height="52" rx="3" fill="#c9a96e" fill-opacity="0.05" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4"/>
+  <!-- Island countertop edge highlight -->
+  <rect x="130" y="248" width="290" height="10" rx="3" fill="#c9a96e" fill-opacity="0.04" stroke="none"/>
+  <!-- Island cabinet doors -->
+  <line x1="248" y1="258" x2="248" y2="300" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.18"/>
+  <line x1="322" y1="258" x2="322" y2="300" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.18"/>
+  <!-- Island handles -->
+  <line x1="185" y1="278" x2="185" y2="286" stroke="#c9a96e" stroke-width="1.1" stroke-opacity="0.3"/>
+  <line x1="281" y1="278" x2="281" y2="286" stroke="#c9a96e" stroke-width="1.1" stroke-opacity="0.3"/>
+  <line x1="358" y1="278" x2="358" y2="286" stroke="#c9a96e" stroke-width="1.1" stroke-opacity="0.3"/>
+
+  <!-- Pendant lights over island -->
+  <line x1="200" y1="30" x2="200" y2="165" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <circle cx="200" cy="173" r="10" fill="#c9a96e" fill-opacity="0.06" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.3"/>
+  <ellipse cx="200" cy="185" rx="35" ry="15" fill="#c9a96e" fill-opacity="0.04"/>
+
+  <line x1="300" y1="30" x2="300" y2="165" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <circle cx="300" cy="173" r="10" fill="#c9a96e" fill-opacity="0.06" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.3"/>
+  <ellipse cx="300" cy="185" rx="35" ry="15" fill="#c9a96e" fill-opacity="0.04"/>
+
+  <line x1="400" y1="30" x2="400" y2="165" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <circle cx="400" cy="173" r="10" fill="#c9a96e" fill-opacity="0.06" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.3"/>
+  <ellipse cx="400" cy="185" rx="35" ry="15" fill="#c9a96e" fill-opacity="0.04"/>
+
+  <!-- Bar stools at island -->
+  <line x1="178" y1="300" x2="178" y2="355" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.2"/>
+  <ellipse cx="178" cy="298" rx="14" ry="5" fill="none" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.24"/>
+  <ellipse cx="178" cy="355" rx="12" ry="4" fill="#c9a96e" fill-opacity="0.08" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.16"/>
+
+  <line x1="248" y1="300" x2="248" y2="355" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.2"/>
+  <ellipse cx="248" cy="298" rx="14" ry="5" fill="none" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.24"/>
+  <ellipse cx="248" cy="355" rx="12" ry="4" fill="#c9a96e" fill-opacity="0.08" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.16"/>
+
+  <line x1="322" y1="300" x2="322" y2="355" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.2"/>
+  <ellipse cx="322" cy="298" rx="14" ry="5" fill="none" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.24"/>
+  <ellipse cx="322" cy="355" rx="12" ry="4" fill="#c9a96e" fill-opacity="0.08" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.16"/>
+
+  <line x1="392" y1="300" x2="392" y2="355" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.2"/>
+  <ellipse cx="392" cy="298" rx="14" ry="5" fill="none" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.24"/>
+  <ellipse cx="392" cy="355" rx="12" ry="4" fill="#c9a96e" fill-opacity="0.08" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.16"/>
+
+  <!-- Floor tiles -->
+  <line x1="0" y1="312" x2="600" y2="312" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.08"/>
+  <line x1="0" y1="326" x2="600" y2="326" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.07"/>
+  <line x1="0" y1="340" x2="600" y2="340" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.07"/>
+  <line x1="0" y1="354" x2="600" y2="354" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.06"/>
+  <line x1="0" y1="368" x2="600" y2="368" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.06"/>
+  <line x1="80" y1="300" x2="80" y2="380" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="160" y1="300" x2="160" y2="380" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="240" y1="300" x2="240" y2="380" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="320" y1="300" x2="320" y2="380" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="400" y1="300" x2="400" y2="380" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="480" y1="300" x2="480" y2="380" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="560" y1="300" x2="560" y2="380" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+</svg>

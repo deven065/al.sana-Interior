@@ -1,0 +1,21 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A2028"/>
+      <stop offset="100%" stop-color="#101318"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E0BE72"/>
+      <stop offset="100%" stop-color="#CFA052"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect x="90" y="120" width="1020" height="660" rx="24" fill="#202732"/>
+  <rect x="150" y="200" width="450" height="500" rx="18" fill="#2A3442"/>
+  <rect x="640" y="200" width="420" height="280" rx="18" fill="#323D4B"/>
+  <rect x="640" y="510" width="420" height="190" rx="18" fill="#2A3442"/>
+  <rect x="200" y="255" width="350" height="8" rx="4" fill="url(#gold)"/>
+  <rect x="200" y="290" width="250" height="8" rx="4" fill="#A8B4C2"/>
+  <rect x="200" y="670" width="240" height="12" rx="6" fill="url(#gold)"/>
+  <text x="150" y="840" fill="#E7EAEE" font-family="Arial" font-size="28">AL.Sana Interior Project Showcase</text>
+</svg>

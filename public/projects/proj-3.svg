@@ -1,0 +1,141 @@
+<svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g3a" cx="50%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g3b" cx="25%" cy="75%" r="45%">
+      <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g3c" cx="75%" cy="75%" r="45%">
+      <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="600" height="380" fill="#080705"/>
+  <rect width="600" height="380" fill="url(#g3a)"/>
+  <rect width="600" height="380" fill="url(#g3b)"/>
+  <rect width="600" height="380" fill="url(#g3c)"/>
+
+  <!-- Ceiling -->
+  <line x1="0" y1="30" x2="600" y2="30" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.28"/>
+  <!-- Floor -->
+  <line x1="0" y1="298" x2="600" y2="298" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.28"/>
+  <line x1="0" y1="304" x2="600" y2="304" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.1"/>
+
+  <!-- Ceiling cornice detail -->
+  <line x1="0" y1="36" x2="600" y2="36" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.1"/>
+
+  <!-- Left wall panel -->
+  <rect x="10" y="34" width="115" height="260" fill="none" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.12"/>
+  <rect x="18" y="42" width="99" height="244" fill="none" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+
+  <!-- Right wall panel -->
+  <rect x="475" y="34" width="115" height="260" fill="none" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.12"/>
+  <rect x="483" y="42" width="99" height="244" fill="none" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+
+  <!-- Curtains on sides -->
+  <!-- Left curtain -->
+  <path d="M 10 34 C 0 120 5 200 8 298" stroke="#c9a96e" stroke-width="1.6" stroke-opacity="0.2" fill="none"/>
+  <path d="M 14 34 C 5 120 10 200 13 298" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.1" fill="none"/>
+  <!-- Right curtain -->
+  <path d="M 590 34 C 600 120 595 200 592 298" stroke="#c9a96e" stroke-width="1.6" stroke-opacity="0.2" fill="none"/>
+  <path d="M 586 34 C 596 120 591 200 588 298" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.1" fill="none"/>
+
+  <!-- Ceiling pendant / chandelier -->
+  <line x1="300" y1="30" x2="300" y2="68" stroke="#c9a96e" stroke-width="0.9" stroke-opacity="0.32"/>
+  <!-- Chandelier arms -->
+  <line x1="264" y1="72" x2="336" y2="72" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.28"/>
+  <line x1="278" y1="68" x2="278" y2="86" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.22"/>
+  <line x1="300" y1="68" x2="300" y2="86" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.22"/>
+  <line x1="322" y1="68" x2="322" y2="86" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.22"/>
+  <!-- Chandelier bulbs -->
+  <circle cx="278" cy="89" r="4" fill="#c9a96e" fill-opacity="0.12" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.28"/>
+  <circle cx="300" cy="89" r="4" fill="#c9a96e" fill-opacity="0.12" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.28"/>
+  <circle cx="322" cy="89" r="4" fill="#c9a96e" fill-opacity="0.12" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.28"/>
+  <!-- Glow -->
+  <ellipse cx="300" cy="95" rx="100" ry="38" fill="#c9a96e" fill-opacity="0.04"/>
+
+  <!-- Headboard (tall, tufted) -->
+  <rect x="128" y="86" width="344" height="135" rx="4" fill="#c9a96e" fill-opacity="0.04" stroke="#c9a96e" stroke-width="1.1" stroke-opacity="0.38"/>
+  <!-- Headboard inner frame -->
+  <rect x="138" y="96" width="324" height="115" rx="3" fill="none" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.16"/>
+  <!-- Tufting detail (grid of diamonds) -->
+  <line x1="200" y1="96" x2="200" y2="211" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.1"/>
+  <line x1="262" y1="96" x2="262" y2="211" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.1"/>
+  <line x1="338" y1="96" x2="338" y2="211" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.1"/>
+  <line x1="400" y1="96" x2="400" y2="211" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.1"/>
+  <line x1="138" y1="154" x2="462" y2="154" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.1"/>
+  <!-- Tuft centres -->
+  <circle cx="231" cy="125" r="3" fill="#c9a96e" fill-opacity="0.12" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.22"/>
+  <circle cx="300" cy="125" r="3" fill="#c9a96e" fill-opacity="0.12" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.22"/>
+  <circle cx="369" cy="125" r="3" fill="#c9a96e" fill-opacity="0.12" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.22"/>
+  <circle cx="231" cy="183" r="3" fill="#c9a96e" fill-opacity="0.12" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.22"/>
+  <circle cx="300" cy="183" r="3" fill="#c9a96e" fill-opacity="0.12" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.22"/>
+  <circle cx="369" cy="183" r="3" fill="#c9a96e" fill-opacity="0.12" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.22"/>
+
+  <!-- Bed frame base -->
+  <rect x="100" y="218" width="400" height="80" rx="3" fill="#c9a96e" fill-opacity="0.04" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.36"/>
+  <!-- Bed side rails -->
+  <line x1="100" y1="220" x2="100" y2="298" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.3"/>
+  <line x1="500" y1="220" x2="500" y2="298" stroke="#c9a96e" stroke-width="1.2" stroke-opacity="0.3"/>
+  <!-- Mattress top line -->
+  <line x1="102" y1="220" x2="498" y2="220" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.2"/>
+
+  <!-- Bedding (sheets / duvet) -->
+  <!-- Main duvet -->
+  <rect x="108" y="220" width="384" height="60" rx="2" fill="#c9a96e" fill-opacity="0.035" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.24"/>
+  <!-- Fold at top of duvet -->
+  <path d="M 108 250 Q 300 242 492 250" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.18" fill="none"/>
+  <!-- Pillow left -->
+  <rect x="120" y="218" width="108" height="48" rx="3" fill="#c9a96e" fill-opacity="0.05" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <rect x="126" y="223" width="96" height="38" rx="2" fill="none" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.12"/>
+  <!-- Pillow right -->
+  <rect x="370" y="218" width="108" height="48" rx="3" fill="#c9a96e" fill-opacity="0.05" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <rect x="376" y="223" width="96" height="38" rx="2" fill="none" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.12"/>
+  <!-- Accent pillow center -->
+  <rect x="260" y="225" width="78" height="54" rx="2" fill="#c9a96e" fill-opacity="0.07" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <rect x="265" y="230" width="68" height="44" rx="2" fill="none" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.12"/>
+  <!-- Bed legs -->
+  <line x1="112" y1="298" x2="108" y2="314" stroke="#c9a96e" stroke-width="0.9" stroke-opacity="0.22"/>
+  <line x1="488" y1="298" x2="492" y2="314" stroke="#c9a96e" stroke-width="0.9" stroke-opacity="0.22"/>
+
+  <!-- Left bedside table -->
+  <rect x="28" y="228" width="65" height="70" rx="2" fill="#c9a96e" fill-opacity="0.04" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <rect x="32" y="232" width="57" height="62" rx="1" fill="none" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.1"/>
+  <!-- Table drawer handle -->
+  <line x1="54" y1="268" x2="68" y2="268" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.24"/>
+  <!-- Left bedside lamp -->
+  <line x1="60" y1="188" x2="60" y2="228" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.24"/>
+  <path d="M 40 188 Q 40 206 60 210 Q 80 206 80 188 Z" fill="#c9a96e" fill-opacity="0.07" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.28"/>
+  <ellipse cx="60" cy="188" rx="20" ry="6" fill="#c9a96e" fill-opacity="0.1" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.24"/>
+  <ellipse cx="60" cy="216" rx="48" ry="22" fill="#c9a96e" fill-opacity="0.04"/>
+
+  <!-- Right bedside table -->
+  <rect x="507" y="228" width="65" height="70" rx="2" fill="#c9a96e" fill-opacity="0.04" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.3"/>
+  <rect x="511" y="232" width="57" height="62" rx="1" fill="none" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.1"/>
+  <!-- Table drawer handle -->
+  <line x1="532" y1="268" x2="546" y2="268" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.24"/>
+  <!-- Right bedside lamp -->
+  <line x1="540" y1="188" x2="540" y2="228" stroke="#c9a96e" stroke-width="0.8" stroke-opacity="0.24"/>
+  <path d="M 520 188 Q 520 206 540 210 Q 560 206 560 188 Z" fill="#c9a96e" fill-opacity="0.07" stroke="#c9a96e" stroke-width="0.7" stroke-opacity="0.28"/>
+  <ellipse cx="540" cy="188" rx="20" ry="6" fill="#c9a96e" fill-opacity="0.1" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.24"/>
+  <ellipse cx="540" cy="216" rx="48" ry="22" fill="#c9a96e" fill-opacity="0.04"/>
+
+  <!-- Rug -->
+  <ellipse cx="300" cy="304" rx="196" ry="14" fill="none" stroke="#c9a96e" stroke-width="0.6" stroke-opacity="0.14"/>
+  <ellipse cx="300" cy="304" rx="182" ry="10" fill="none" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.07"/>
+
+  <!-- Floor planks -->
+  <line x1="0" y1="314" x2="600" y2="314" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.09"/>
+  <line x1="0" y1="327" x2="600" y2="327" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.08"/>
+  <line x1="0" y1="340" x2="600" y2="340" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.07"/>
+  <line x1="0" y1="353" x2="600" y2="353" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.07"/>
+  <line x1="0" y1="366" x2="600" y2="366" stroke="#c9a96e" stroke-width="0.4" stroke-opacity="0.06"/>
+  <!-- Plank joints -->
+  <line x1="110" y1="306" x2="110" y2="320" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="285" y1="306" x2="285" y2="320" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+  <line x1="460" y1="306" x2="460" y2="320" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.06"/>
+</svg>
