@@ -74,10 +74,10 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-700"
         style={{
-          padding:        scrolled ? "0.9rem 0" : "1.75rem 0",
-          background:     scrolled ? "rgba(7,6,10,0.94)" : "transparent",
-          backdropFilter: scrolled ? "blur(20px)"         : "none",
-          borderBottom:   scrolled
+          padding:        scrolled || menuOpen ? "0.9rem 0" : "1.75rem 0",
+          background:     scrolled || menuOpen ? "rgba(7,6,10,0.98)" : "transparent",
+          backdropFilter: scrolled || menuOpen ? "blur(20px)"         : "none",
+          borderBottom:   scrolled || menuOpen
             ? "1px solid rgba(184,151,90,0.14)"
             : "1px solid transparent",
         }}
@@ -147,19 +147,31 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
-              className="lg:hidden relative z-50 flex flex-col justify-center gap-[5px] w-8 h-8"
+              className="lg:hidden relative z-[60] flex flex-col justify-center gap-[5px] w-10 h-10 -mr-1"
             >
               <span
-                className="block h-px bg-white transition-all duration-500 origin-center"
-                style={{ width: "24px", transform: menuOpen ? "translateY(6px) rotate(45deg)" : "none" }}
+                className="block h-px transition-all duration-500 origin-center"
+                style={{
+                  width:      "24px",
+                  background: menuOpen ? gold : "white",
+                  transform:  menuOpen ? "translateY(6px) rotate(45deg)" : "none",
+                }}
               />
               <span
-                className="block h-px bg-white transition-all duration-300"
-                style={{ width: "16px", opacity: menuOpen ? 0 : 1 }}
+                className="block h-px transition-all duration-300"
+                style={{
+                  width:      "16px",
+                  background: menuOpen ? gold : "white",
+                  opacity:    menuOpen ? 0 : 1,
+                }}
               />
               <span
-                className="block h-px bg-white transition-all duration-500 origin-center"
-                style={{ width: "24px", transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "none" }}
+                className="block h-px transition-all duration-500 origin-center"
+                style={{
+                  width:      "24px",
+                  background: menuOpen ? gold : "white",
+                  transform:  menuOpen ? "translateY(-6px) rotate(-45deg)" : "none",
+                }}
               />
             </button>
           </div>
@@ -168,75 +180,117 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
 
       {/* ── MOBILE MENU ────────────────────────────────────────────── */}
       <div
-        className="fixed inset-0 z-40 flex flex-col items-center justify-center transition-all duration-700"
+        className="fixed inset-0 z-40 lg:hidden flex flex-col transition-all duration-500"
         style={{
-          background:    "rgba(7,6,10,0.98)",
+          background:     "rgba(7,6,10,0.99)",
           backdropFilter: "blur(24px)",
-          opacity:       menuOpen ? 1 : 0,
-          pointerEvents: menuOpen ? "auto" : "none",
+          opacity:        menuOpen ? 1 : 0,
+          pointerEvents:  menuOpen ? "auto" : "none",
+          transform:      menuOpen ? "translateX(0)" : "translateX(4%)",
         }}
       >
-        {/* Gold corner accents */}
-        <div className="absolute top-0 left-0 w-28 h-28 border-t border-l" style={{ borderColor: "rgba(184,151,90,0.18)" }} />
-        <div className="absolute bottom-0 right-0 w-28 h-28 border-b border-r" style={{ borderColor: "rgba(184,151,90,0.18)" }} />
+        {/* Thin top gold line */}
+        <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(184,151,90,0.4), transparent)", flexShrink: 0 }} />
 
-        <nav className="flex flex-col items-center gap-8">
-          {navLinks.map((link, i) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="transition-all duration-500"
-              style={{
-                fontFamily:      "var(--font-heading)",
-                fontSize:        "clamp(1.8rem, 5vw, 2.4rem)",
-                fontWeight:      300,
-                letterSpacing:   "0.06em",
-                color:           pathname === link.href ? gold : "rgba(250,250,248,0.65)",
-                transitionDelay: `${i * 55}ms`,
-                transform:       menuOpen ? "translateY(0)" : "translateY(22px)",
-                opacity:         menuOpen ? 1 : 0,
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
+        {/* Scrollable content — starts below header height */}
+        <div
+          className="flex-1 overflow-y-auto"
+          style={{
+            paddingTop:    "5.5rem",
+            paddingBottom: "2rem",
+            paddingLeft:   "clamp(2rem,8vw,3.5rem)",
+            paddingRight:  "clamp(2rem,8vw,3.5rem)",
+          }}
+        >
+          {/* Nav links */}
+          <nav className="flex flex-col" style={{ gap: "0" }}>
+            {navLinks.map((link, i) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="flex items-center justify-between py-4 transition-all duration-500 group"
+                style={{
+                  fontFamily:      "var(--font-heading)",
+                  fontSize:        "clamp(1.4rem, 5.5vw, 1.95rem)",
+                  fontWeight:      300,
+                  letterSpacing:   "0.04em",
+                  color:           pathname === link.href ? gold : "rgba(250,250,248,0.70)",
+                  borderBottom:    "1px solid rgba(184,151,90,0.08)",
+                  transitionDelay: `${i * 40}ms`,
+                  transform:       menuOpen ? "translateX(0)" : "translateX(-18px)",
+                  opacity:         menuOpen ? 1 : 0,
+                }}
+              >
+                <span>{link.label}</span>
+                <span
+                  className="text-xs transition-all duration-300 group-hover:translate-x-1"
+                  style={{ color: pathname === link.href ? gold : "rgba(184,151,90,0.35)", fontFamily: "var(--font-body)" }}
+                >
+                  →
+                </span>
+              </Link>
+            ))}
+          </nav>
 
-          <Link
-            href="/contact"
-            className="mt-6 transition-all duration-500 hover:bg-[#b8975a] hover:text-[#07060a]"
+          {/* CTA button */}
+          <div
+            className="mt-8 transition-all duration-500"
             style={{
-              fontFamily:      "var(--font-body)",
-              fontSize:        "0.63rem",
-              letterSpacing:   "0.32em",
-              textTransform:   "uppercase",
-              fontWeight:      500,
-              color:           gold,
-              border:          `1px solid rgba(184,151,90,0.45)`,
-              padding:         "0.8rem 2.5rem",
-              transitionDelay: `${navLinks.length * 55}ms`,
+              transitionDelay: `${navLinks.length * 40 + 60}ms`,
+              transform:       menuOpen ? "translateX(0)" : "translateX(-18px)",
+              opacity:         menuOpen ? 1 : 0,
             }}
           >
-            Free Consultation
-          </Link>
-        </nav>
+            <Link
+              href="/contact"
+              className="flex items-center justify-center transition-all duration-400 hover:bg-[#b8975a] hover:text-[#07060a]"
+              style={{
+                fontFamily:    "var(--font-body)",
+                fontSize:      "0.65rem",
+                letterSpacing: "0.32em",
+                textTransform: "uppercase",
+                fontWeight:    500,
+                color:         gold,
+                border:        `1px solid rgba(184,151,90,0.5)`,
+                padding:       "1rem 2rem",
+                width:         "100%",
+              }}
+            >
+              Free Consultation
+            </Link>
+          </div>
 
-        <div className="absolute bottom-10 flex items-center gap-6">
-          <a
-            href="tel:+919967622281"
-            className="text-xs tracking-widest transition-colors hover:text-[#b8975a]"
-            style={{ fontFamily: "var(--font-body)", color: "rgba(250,250,248,0.28)" }}
+          {/* Contact info */}
+          <div
+            className="mt-8 flex flex-col gap-3 transition-all duration-500"
+            style={{
+              transitionDelay: `${navLinks.length * 40 + 120}ms`,
+              transform:       menuOpen ? "translateX(0)" : "translateX(-18px)",
+              opacity:         menuOpen ? 1 : 0,
+            }}
           >
-            +91 99676 22281
-          </a>
-          <span style={{ color: "rgba(250,250,248,0.15)" }}>|</span>
-          <a
-            href="mailto:hello@alsanainterior.com"
-            className="text-xs tracking-widest transition-colors hover:text-[#b8975a]"
-            style={{ fontFamily: "var(--font-body)", color: "rgba(250,250,248,0.28)" }}
-          >
-            hello@alsanainterior.com
-          </a>
+            <div style={{ height: "1px", background: "linear-gradient(90deg, rgba(184,151,90,0.15), transparent)", marginBottom: "0.5rem" }} />
+            <a
+              href="tel:+919967622281"
+              className="flex items-center gap-2 text-xs tracking-widest transition-colors hover:text-[#b8975a]"
+              style={{ fontFamily: "var(--font-body)", color: "rgba(250,250,248,0.28)" }}
+            >
+              <span style={{ color: "rgba(184,151,90,0.45)", fontSize: "0.7rem" }}>✆</span>
+              +91 99676 22281
+            </a>
+            <a
+              href="mailto:hello@alsanainterior.com"
+              className="flex items-center gap-2 text-xs tracking-widest transition-colors hover:text-[#b8975a]"
+              style={{ fontFamily: "var(--font-body)", color: "rgba(250,250,248,0.28)" }}
+            >
+              <span style={{ color: "rgba(184,151,90,0.45)", fontSize: "0.7rem" }}>✉</span>
+              hello@alsanainterior.com
+            </a>
+          </div>
         </div>
+
+        {/* Bottom thin gold line */}
+        <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(184,151,90,0.4), transparent)", flexShrink: 0 }} />
       </div>
 
       {/* ── MAIN ───────────────────────────────────────────────────── */}
