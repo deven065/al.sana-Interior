@@ -458,6 +458,144 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Location / Map ── */}
+      <section className="section" style={{ background: "var(--surface)", paddingTop: "0" }}>
+        <div className="container mx-auto px-6">
+          <hr className="section-divider" style={{ marginBottom: "4rem" }} />
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "3rem",
+              alignItems: "center",
+            }}
+          >
+            {/* Left — location details */}
+            <div className="reveal-left">
+              <span className="section-label">Find Us</span>
+              <h2
+                className="mt-4 mb-6"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  fontWeight: 300,
+                  fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
+                  lineHeight: 1.15,
+                }}
+              >
+                Visit Our<br />
+                <em style={{ color: "#b8975a" }}>Design Studio</em>
+              </h2>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                {[
+                  {
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" strokeWidth="1.6" style={{ width: "1.1rem", height: "1.1rem", flexShrink: 0, marginTop: "0.1rem" }}>
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                    ),
+                    label: "Address",
+                    value: "AL.Sana Interior, Mumbai, Maharashtra, India",
+                  },
+                  {
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" strokeWidth="1.6" style={{ width: "1.1rem", height: "1.1rem", flexShrink: 0, marginTop: "0.1rem" }}>
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                      </svg>
+                    ),
+                    label: "Phone",
+                    value: "+91 99676 22281",
+                    href: "tel:+919967622281",
+                  },
+                  {
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" strokeWidth="1.6" style={{ width: "1.1rem", height: "1.1rem", flexShrink: 0, marginTop: "0.1rem" }}>
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                      </svg>
+                    ),
+                    label: "Email",
+                    value: "hello@alsanainterior.com",
+                    href: "mailto:hello@alsanainterior.com",
+                  },
+                  {
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" strokeWidth="1.6" style={{ width: "1.1rem", height: "1.1rem", flexShrink: 0, marginTop: "0.1rem" }}>
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                    ),
+                    label: "Studio Hours",
+                    value: "Mon – Sat · 10:00 AM – 7:00 PM",
+                  },
+                ].map((item) => (
+                  <div key={item.label} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                    {item.icon}
+                    <div>
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(250,250,248,0.28)", marginBottom: "0.25rem", fontWeight: 400 }}>
+                        {item.label}
+                      </p>
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          className="transition-colors duration-300 hover:text-[#b8975a]"
+                          style={{ fontFamily: "var(--font-body)", color: "rgba(250,250,248,0.65)", fontWeight: 300, fontSize: "0.95rem" }}
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p style={{ fontFamily: "var(--font-body)", color: "rgba(250,250,248,0.65)", fontWeight: 300, fontSize: "0.95rem" }}>
+                          {item.value}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <a
+                href="https://maps.google.com/?q=AL.SANA+INTERIOR+Mumbai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+                style={{ display: "inline-flex", marginTop: "2.5rem", fontSize: "0.62rem" }}
+              >
+                Get Directions →
+              </a>
+            </div>
+
+            {/* Right — Map */}
+            <div
+              className="reveal-right"
+              style={{
+                position: "relative",
+                border:   "1px solid rgba(184,151,90,0.2)",
+                overflow: "hidden",
+              }}
+            >
+              {/* Gold top accent line */}
+              <div style={{ height: "2px", background: "linear-gradient(90deg, transparent, #b8975a, transparent)" }} />
+
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.471918340648!2d72.87080507466752!3d19.174579648871493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7d5569d5443%3A0x9838f4ebf6eac47e!2sAL.SANA%20INTERIOR!5e0!3m2!1sen!2sin!4v1772487592973!5m2!1sen!2sin"
+                width="100%"
+                height="420"
+                style={{ border: 0, display: "block", filter: "invert(0.9) hue-rotate(180deg) saturate(0.7) brightness(0.85)" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="AL.Sana Interior Location"
+              />
+
+              {/* Gold bottom accent line */}
+              <div style={{ height: "2px", background: "linear-gradient(90deg, transparent, #b8975a, transparent)" }} />
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
