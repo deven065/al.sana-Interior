@@ -1,14 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
   const dot  = useRef<HTMLDivElement>(null);
   const ring = useRef<HTMLDivElement>(null);
+  const [isPointerDevice, setIsPointerDevice] = useState(false);
 
   useEffect(() => {
-    // Hide on touch devices
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    // Only show on true pointer (mouse) devices — not touch screens or stylus-only
+    const hasMouse = window.matchMedia("(pointer: fine) and (hover: hover)").matches;
+    if (!hasMouse) return;
+    setIsPointerDevice(true);
 
     document.body.style.cursor = "none";
 
@@ -68,6 +71,9 @@ export default function CustomCursor() {
       document.body.style.cursor = "";
     };
   }, []);
+
+  // Render nothing on touch/mobile/tablet devices
+  if (!isPointerDevice) return null;
 
   return (
     <>

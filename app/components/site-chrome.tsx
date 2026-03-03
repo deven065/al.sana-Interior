@@ -532,7 +532,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         <div
           className="flex-1 overflow-y-auto"
           style={{
-            paddingTop:    "5.5rem",
+            paddingTop:    topBarHidden ? "6.5rem" : "9.5rem",
             paddingBottom: "2rem",
             paddingLeft:   "clamp(2rem,8vw,3.5rem)",
             paddingRight:  "clamp(2rem,8vw,3.5rem)",
