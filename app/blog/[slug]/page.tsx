@@ -26,7 +26,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
   return (
     <main>
-      <section className="hero-bg noise-overlay" style={{ paddingTop: "8rem", paddingBottom: "5rem" }}>
+      <section className="hero-bg noise-overlay" style={{ paddingTop: "10rem", paddingBottom: "5rem" }}>
         <div className="container mx-auto px-6">
           <span className="section-label reveal">Blog</span>
           <div className="gold-rule-left mb-6 reveal delay-100" />

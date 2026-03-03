@@ -12,7 +12,7 @@ export default function AboutPage() {
   return (
     <main>
       {/* ── Page Hero ── */}
-      <section className="hero-bg noise-overlay" style={{ paddingTop: "8rem", paddingBottom: "5rem" }}>
+      <section className="hero-bg noise-overlay" style={{ paddingTop: "10rem", paddingBottom: "5rem" }}>
         <div className="container mx-auto px-6">
           <span className="section-label reveal">About Us</span>
           <div className="gold-rule-left mb-6 reveal delay-100" />
@@ -157,3 +157,4 @@ export default function AboutPage() {
     </main>
   );
 }
+

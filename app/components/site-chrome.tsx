@@ -16,12 +16,21 @@ const navLinks = [
 ];
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
+  const [scrollPct, setScrollPct]   = useState(0);
+  const [menuOpen, setMenuOpen]     = useState(false);
+  const [topBarHidden, setTopBarHidden] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 50);
+      setTopBarHidden(y > 30);
+      const el = document.documentElement;
+      const total = el.scrollHeight - el.clientHeight;
+      setScrollPct(total > 0 ? (y / total) * 100 : 0);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -70,111 +79,438 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         }}
       />
 
-      {/* ── NAVBAR ─────────────────────────────────────────────── */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-700"
+      {/* ── SCROLL PROGRESS BAR (top edge, 2px) ─────────────────── */}
+      <div
+        aria-hidden="true"
+        className="fixed top-0 left-0 right-0 z-[70]"
+        style={{ height: "2px", background: "rgba(184,151,90,0.08)", pointerEvents: "none" }}
+      >
+        <div
+          style={{
+            height: "100%",
+            width: `${scrollPct}%`,
+            background: "linear-gradient(90deg, #b8975a, #e8d5a3, #b8975a)",
+            transition: "width 0.1s linear",
+            boxShadow: "0 0 10px rgba(184,151,90,0.7), 0 0 20px rgba(184,151,90,0.3)",
+          }}
+        />
+      </div>
+
+      {/* ── UTILITY TOP BAR (desktop only, slides away on scroll) ── */}
+      <div
+        aria-hidden={topBarHidden}
+        className="hidden lg:block fixed left-0 right-0 z-[55] transition-all duration-500 overflow-hidden"
         style={{
-          padding:        scrolled || menuOpen ? "0.9rem 0" : "1.75rem 0",
-          background:     scrolled || menuOpen ? "rgba(7,6,10,0.98)" : "transparent",
-          backdropFilter: scrolled || menuOpen ? "blur(20px)"         : "none",
-          borderBottom:   scrolled || menuOpen
-            ? "1px solid rgba(184,151,90,0.14)"
-            : "1px solid transparent",
+          top:           "2px",
+          height:        topBarHidden ? "0px" : "36px",
+          opacity:       topBarHidden ? 0 : 1,
+          background:    "rgba(7,6,10,0.92)",
+          backdropFilter:"blur(12px)",
+          borderBottom:  "1px solid rgba(184,151,90,0.08)",
         }}
       >
         <div
-          className="flex items-center justify-between"
-          style={{ maxWidth: "1320px", margin: "0 auto", padding: "0 clamp(1.5rem,5vw,4rem)" }}
+          style={{
+            maxWidth: "1320px",
+            margin: "0 auto",
+            height: "36px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 clamp(1.5rem,5vw,4rem)",
+          }}
         >
-          {/* Logo */}
-          <Link href="/" className="group flex flex-col leading-none select-none">
+          {/* Left — tagline */}
+          <span
+            style={{
+              fontFamily:    "var(--font-body)",
+              fontSize:      "0.55rem",
+              letterSpacing: "0.28em",
+              textTransform: "uppercase",
+              color:         "rgba(250,250,248,0.28)",
+              fontWeight:    300,
+            }}
+          >
+            Mumbai&apos;s Premier Luxury Interior Studio
+            <span style={{ color: "rgba(184,151,90,0.35)", margin: "0 0.6em" }}>◆</span>
+            Since 2015
+          </span>
+
+          {/* Right — contact + social */}
+          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+            <a
+              href="tel:+919967622281"
+              style={{
+                fontFamily:    "var(--font-body)",
+                fontSize:      "0.55rem",
+                letterSpacing: "0.18em",
+                color:         "rgba(250,250,248,0.32)",
+                textDecoration: "none",
+                transition:    "color 0.3s",
+              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = gold)}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(250,250,248,0.32)")}
+            >
+              +91 99676 22281
+            </a>
+            <div style={{ width: "1px", height: "10px", background: "rgba(184,151,90,0.2)" }} />
+            <a
+              href="https://wa.me/919967622281"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily:    "var(--font-body)",
+                fontSize:      "0.55rem",
+                letterSpacing: "0.18em",
+                color:         "rgba(250,250,248,0.32)",
+                textDecoration: "none",
+                transition:    "color 0.3s",
+              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#25D366")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(250,250,248,0.32)")}
+            >
+              WhatsApp
+            </a>
+            <div style={{ width: "1px", height: "10px", background: "rgba(184,151,90,0.2)" }} />
+            <a
+              href="https://www.instagram.com/alsana_interior"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily:    "var(--font-body)",
+                fontSize:      "0.55rem",
+                letterSpacing: "0.18em",
+                color:         "rgba(250,250,248,0.32)",
+                textDecoration: "none",
+                transition:    "color 0.3s",
+              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = gold)}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(250,250,248,0.32)")}
+            >
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ── MAIN NAVBAR ────────────────────────────────────────────── */}
+      <header
+        className="fixed z-50 transition-all duration-700"
+        style={{
+          top:            topBarHidden ? "0.75rem" : "calc(38px + 0.75rem)",
+          left:           "50%",
+          transform:      "translateX(-50%)",
+          width:          "calc(100% - 3rem)",
+          maxWidth:       "1300px",
+          paddingTop:     scrolled || menuOpen ? "0.85rem" : "1.25rem",
+          paddingBottom:  scrolled || menuOpen ? "0.85rem" : "1.25rem",
+          background:     scrolled || menuOpen
+            ? "rgba(9,8,13,0.92)"
+            : "rgba(7,6,10,0.35)",
+          backdropFilter: "blur(28px) saturate(1.6)",
+          WebkitBackdropFilter: "blur(28px) saturate(1.6)",
+          border:         scrolled || menuOpen
+            ? "1px solid rgba(184,151,90,0.16)"
+            : "1px solid rgba(184,151,90,0.08)",
+          borderRadius:   "100px",
+          boxShadow:      scrolled || menuOpen
+            ? "0 8px 40px rgba(0,0,0,0.55), 0 1px 0 rgba(184,151,90,0.06) inset"
+            : "none",
+        }}
+      >
+        {/* ── Desktop: centered logo, split nav ── */}
+        <div
+          className="hidden lg:grid"
+          style={{
+            maxWidth:            "1300px",
+            margin:              "0 auto",
+            padding:             "0 clamp(1.5rem,3vw,2.5rem)",
+            gridTemplateColumns: "1fr auto 1fr",
+            alignItems:          "center",
+            gap:                 "3rem",
+          }}
+        >
+          {/* Left nav */}
+          <nav style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "2.5rem" }}>
+            {navLinks.slice(0, 4).map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    position:       "relative",
+                    display:        "flex",
+                    flexDirection:  "column",
+                    alignItems:     "center",
+                    gap:            "3px",
+                    fontFamily:     "var(--font-body)",
+                    fontSize:       "0.58rem",
+                    letterSpacing:  "0.24em",
+                    textTransform:  "uppercase",
+                    fontWeight:     active ? 500 : 300,
+                    color:          active ? gold : "rgba(250,250,248,0.42)",
+                    textDecoration: "none",
+                    transition:     "color 0.35s ease",
+                    paddingBottom:  "2px",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!active) (e.currentTarget as HTMLAnchorElement).style.color = "rgba(250,250,248,0.85)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!active) (e.currentTarget as HTMLAnchorElement).style.color = "rgba(250,250,248,0.42)";
+                  }}
+                >
+                  {/* Active dot above */}
+                  <span style={{
+                    display:    "block",
+                    width:      "3px",
+                    height:     "3px",
+                    borderRadius: "50%",
+                    background: gold,
+                    opacity:    active ? 1 : 0,
+                    transition: "opacity 0.35s ease, transform 0.35s ease",
+                    transform:  active ? "scaleX(1)" : "scaleX(0)",
+                    flexShrink: 0,
+                  }} />
+                  {link.label}
+                  {/* Underline */}
+                  <span style={{
+                    position:   "absolute",
+                    bottom:     0,
+                    left:       "50%",
+                    transform:  active ? "translateX(-50%) scaleX(1)" : "translateX(-50%) scaleX(0)",
+                    width:      "100%",
+                    height:     "1px",
+                    background: `linear-gradient(90deg, transparent, ${gold}, transparent)`,
+                    transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)",
+                    transformOrigin: "center",
+                  }} />
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Center — Logo */}
+          <Link
+            href="/"
+            style={{
+              display:        "flex",
+              flexDirection:  "column",
+              alignItems:     "center",
+              textDecoration: "none",
+              gap:            0,
+              userSelect:     "none",
+              position:       "relative",
+              padding:        "0 1rem",
+            }}
+          >
+            {/* Corner ticks top */}
+            <div aria-hidden="true" style={{ position: "absolute", top: 0, left: 0, width: "10px", height: "10px",
+              borderTop: `1px solid rgba(184,151,90,${scrolled ? "0.55" : "0.35"})`,
+              borderLeft: `1px solid rgba(184,151,90,${scrolled ? "0.55" : "0.35"})`,
+              transition: "border-color 0.5s" }} />
+            <div aria-hidden="true" style={{ position: "absolute", top: 0, right: 0, width: "10px", height: "10px",
+              borderTop: `1px solid rgba(184,151,90,${scrolled ? "0.55" : "0.35"})`,
+              borderRight: `1px solid rgba(184,151,90,${scrolled ? "0.55" : "0.35"})`,
+              transition: "border-color 0.5s" }} />
+
+            {/* Wordmark */}
             <span
-              className="text-[1.65rem] font-light tracking-[0.28em] transition-colors duration-300 group-hover:text-[#b8975a]"
-              style={{ fontFamily: "var(--font-heading)", color: "#fafaf8" }}
+              style={{
+                fontFamily:  "var(--font-heading)",
+                fontWeight:  300,
+                fontSize:    scrolled ? "1.5rem" : "2rem",
+                letterSpacing: "0.38em",
+                color:       "#fafaf8",
+                lineHeight:  1,
+                paddingLeft: "0.38em",
+                transition:  "font-size 0.55s cubic-bezier(0.22,1,0.36,1)",
+              }}
             >
               AL.SANA
             </span>
+
+            {/* Diamond divider row */}
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", margin: "4px 0 3px" }}>
+              <div style={{ width: "20px", height: "1px", background: `linear-gradient(90deg, transparent, rgba(184,151,90,0.5))` }} />
+              <span style={{ color: gold, fontSize: "0.35rem", opacity: 0.8 }}>◆</span>
+              <div style={{ width: "20px", height: "1px", background: `linear-gradient(90deg, rgba(184,151,90,0.5), transparent)` }} />
+            </div>
+
             <span
-              className="text-[0.55rem] tracking-[0.6em] uppercase mt-0.5"
-              style={{ fontFamily: "var(--font-body)", color: gold, fontWeight: 400 }}
+              style={{
+                fontFamily:    "var(--font-body)",
+                fontSize:      "0.42rem",
+                letterSpacing: "0.8em",
+                textTransform: "uppercase",
+                color:         gold,
+                fontWeight:    400,
+                paddingLeft:   "0.8em",
+              }}
             >
               Interior
             </span>
+
+            {/* Corner ticks bottom */}
+            <div aria-hidden="true" style={{ position: "absolute", bottom: 0, left: 0, width: "10px", height: "10px",
+              borderBottom: `1px solid rgba(184,151,90,${scrolled ? "0.55" : "0.35"})`,
+              borderLeft: `1px solid rgba(184,151,90,${scrolled ? "0.55" : "0.35"})`,
+              transition: "border-color 0.5s" }} />
+            <div aria-hidden="true" style={{ position: "absolute", bottom: 0, right: 0, width: "10px", height: "10px",
+              borderBottom: `1px solid rgba(184,151,90,${scrolled ? "0.55" : "0.35"})`,
+              borderRight: `1px solid rgba(184,151,90,${scrolled ? "0.55" : "0.35"})`,
+              transition: "border-color 0.5s" }} />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="relative text-[0.63rem] tracking-[0.22em] uppercase font-normal transition-colors duration-300 group"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  color: pathname === link.href ? gold : "rgba(250,250,248,0.50)",
-                }}
-              >
-                {link.label}
-                <span
-                  className="absolute -bottom-1 left-0 h-px transition-all duration-500"
+          {/* Right nav */}
+          <nav style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: "2.5rem" }}>
+            {navLinks.slice(4, 7).map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
                   style={{
-                    background: gold,
-                    width: pathname === link.href ? "100%" : "0%",
+                    position:       "relative",
+                    display:        "flex",
+                    flexDirection:  "column",
+                    alignItems:     "center",
+                    gap:            "3px",
+                    fontFamily:     "var(--font-body)",
+                    fontSize:       "0.58rem",
+                    letterSpacing:  "0.24em",
+                    textTransform:  "uppercase",
+                    fontWeight:     active ? 500 : 300,
+                    color:          active ? gold : "rgba(250,250,248,0.42)",
+                    textDecoration: "none",
+                    transition:     "color 0.35s ease",
+                    paddingBottom:  "2px",
                   }}
-                />
-              </Link>
-            ))}
-          </nav>
+                  onMouseEnter={(e) => {
+                    if (!active) (e.currentTarget as HTMLAnchorElement).style.color = "rgba(250,250,248,0.85)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!active) (e.currentTarget as HTMLAnchorElement).style.color = "rgba(250,250,248,0.42)";
+                  }}
+                >
+                  <span style={{
+                    display:    "block",
+                    width:      "3px",
+                    height:     "3px",
+                    borderRadius: "50%",
+                    background: gold,
+                    opacity:    active ? 1 : 0,
+                    transition: "opacity 0.35s ease",
+                    flexShrink: 0,
+                  }} />
+                  {link.label}
+                  <span style={{
+                    position:   "absolute",
+                    bottom:     0,
+                    left:       "50%",
+                    transform:  active ? "translateX(-50%) scaleX(1)" : "translateX(-50%) scaleX(0)",
+                    width:      "100%",
+                    height:     "1px",
+                    background: `linear-gradient(90deg, transparent, ${gold}, transparent)`,
+                    transition: "transform 0.45s cubic-bezier(0.22,1,0.36,1)",
+                    transformOrigin: "center",
+                  }} />
+                </Link>
+              );
+            })}
 
-          {/* CTA + Hamburger */}
-          <div className="flex items-center gap-5">
+            {/* Thin gold rule */}
+            <div style={{ width: "1px", height: "16px", background: "rgba(184,151,90,0.2)", flexShrink: 0 }} />
+
+            {/* CTA — filled on hover */}
             <Link
               href="/contact"
-              className="hidden lg:inline-flex items-center gap-2 text-[#b8975a] transition-all duration-500 hover:bg-[#b8975a] hover:text-[#07060a] hover:border-[#b8975a]"
               style={{
-                fontFamily:    "var(--font-body)",
-                fontSize:      "0.63rem",
-                letterSpacing: "0.26em",
-                textTransform: "uppercase",
-                fontWeight:    500,
-                border:        `1px solid rgba(184,151,90,0.45)`,
-                padding:       "0.6rem 1.4rem",
+                fontFamily:     "var(--font-body)",
+                fontSize:       "0.56rem",
+                letterSpacing:  "0.3em",
+                textTransform:  "uppercase",
+                fontWeight:     500,
+                color:          gold,
+                border:         "1px solid rgba(184,151,90,0.38)",
+                padding:        "0.6rem 1.35rem",
+                textDecoration: "none",
+                whiteSpace:     "nowrap",
+                transition:     "background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease",
+                position:       "relative",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLAnchorElement;
+                el.style.background  = gold;
+                el.style.color       = black;
+                el.style.boxShadow   = `0 4px 24px rgba(184,151,90,0.3)`;
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLAnchorElement;
+                el.style.background  = "transparent";
+                el.style.color       = gold;
+                el.style.boxShadow   = "none";
               }}
             >
-              Free Consultation
+              Free Consult
             </Link>
+          </nav>
+        </div>
 
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
-              className="lg:hidden relative z-[60] flex flex-col justify-center gap-[5px] w-10 h-10 -mr-1"
-            >
-              <span
-                className="block h-px transition-all duration-500 origin-center"
-                style={{
-                  width:      "24px",
-                  background: menuOpen ? gold : "white",
-                  transform:  menuOpen ? "translateY(6px) rotate(45deg)" : "none",
-                }}
-              />
-              <span
-                className="block h-px transition-all duration-300"
-                style={{
-                  width:      "16px",
-                  background: menuOpen ? gold : "white",
-                  opacity:    menuOpen ? 0 : 1,
-                }}
-              />
-              <span
-                className="block h-px transition-all duration-500 origin-center"
-                style={{
-                  width:      "24px",
-                  background: menuOpen ? gold : "white",
-                  transform:  menuOpen ? "translateY(-6px) rotate(-45deg)" : "none",
-                }}
-              />
-            </button>
-          </div>
+        {/* ── Mobile: logo left + hamburger right ── */}
+        <div
+          className="flex lg:hidden items-center justify-between"
+          style={{ maxWidth: "1300px", margin: "0 auto", padding: "0 1.5rem" }}
+        >
+          <Link href="/" style={{ display: "flex", flexDirection: "column", textDecoration: "none", userSelect: "none", position: "relative", padding: "0 0.75rem" }}>
+            <div aria-hidden="true" style={{ position: "absolute", top: 0, left: 0, width: "7px", height: "7px", borderTop: `1px solid rgba(184,151,90,0.45)`, borderLeft: `1px solid rgba(184,151,90,0.45)` }} />
+            <div aria-hidden="true" style={{ position: "absolute", top: 0, right: 0, width: "7px", height: "7px", borderTop: `1px solid rgba(184,151,90,0.45)`, borderRight: `1px solid rgba(184,151,90,0.45)` }} />
+            <span style={{ fontFamily: "var(--font-heading)", fontWeight: 300, fontSize: "1.5rem", letterSpacing: "0.28em", color: "#fafaf8", lineHeight: 1 }}>
+              AL.SANA
+            </span>
+            <div style={{ display: "flex", alignItems: "center", gap: "5px", margin: "3px 0 2px" }}>
+              <div style={{ flex: 1, height: "1px", background: `linear-gradient(90deg, transparent, rgba(184,151,90,0.4))` }} />
+              <span style={{ color: gold, fontSize: "0.3rem" }}>◆</span>
+              <div style={{ flex: 1, height: "1px", background: `linear-gradient(90deg, rgba(184,151,90,0.4), transparent)` }} />
+            </div>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "0.4rem", letterSpacing: "0.7em", textTransform: "uppercase", color: gold, fontWeight: 400, paddingLeft: "0.7em" }}>
+              Interior
+            </span>
+            <div aria-hidden="true" style={{ position: "absolute", bottom: 0, left: 0, width: "7px", height: "7px", borderBottom: `1px solid rgba(184,151,90,0.45)`, borderLeft: `1px solid rgba(184,151,90,0.45)` }} />
+            <div aria-hidden="true" style={{ position: "absolute", bottom: 0, right: 0, width: "7px", height: "7px", borderBottom: `1px solid rgba(184,151,90,0.45)`, borderRight: `1px solid rgba(184,151,90,0.45)` }} />
+          </Link>
+
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            className="relative z-[60] flex flex-col justify-center gap-[5px] w-10 h-10 -mr-1"
+          >
+            <span
+              className="block h-px transition-all duration-500 origin-center"
+              style={{
+                width: "24px",
+                background: menuOpen ? gold : "white",
+                transform: menuOpen ? "translateY(6px) rotate(45deg)" : "none",
+              }}
+            />
+            <span
+              className="block h-px transition-all duration-300"
+              style={{
+                width: "16px",
+                background: menuOpen ? gold : "white",
+                opacity: menuOpen ? 0 : 1,
+              }}
+            />
+            <span
+              className="block h-px transition-all duration-500 origin-center"
+              style={{
+                width: "24px",
+                background: menuOpen ? gold : "white",
+                transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "none",
+              }}
+            />
+          </button>
         </div>
       </header>
 

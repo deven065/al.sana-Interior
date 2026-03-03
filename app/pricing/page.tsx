@@ -58,7 +58,7 @@ export default function PricingPage() {
       {/* ── Page Hero ── */}
       <section
         className="hero-bg noise-overlay"
-        style={{ paddingTop: "8rem", paddingBottom: "5rem" }}
+        style={{ paddingTop: "10rem", paddingBottom: "5rem" }}
       >
         <div className="container mx-auto px-6">
           <span className="section-label reveal">Investment</span>
@@ -304,3 +304,4 @@ export default function PricingPage() {
     </main>
   );
 }
+

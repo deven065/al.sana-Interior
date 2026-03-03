@@ -31,6 +31,8 @@ export default function ContactPage() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [error, setError] = useState("");
+  const [focusedField, setFocusedField] = useState("");
+  const [openDropdown, setOpenDropdown] = useState("");
 
   function updateField(key: keyof FormData, value: string) {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -77,10 +79,12 @@ export default function ContactPage() {
     setStep(1);
   }
 
-  const inputStyle = {
+  const inputStyle = (fieldId: string): React.CSSProperties => ({
     width: "100%",
-    background: "#1a1825",
-    border: "1px solid rgba(184,151,90,0.2)",
+    background: focusedField === fieldId ? "rgba(184,151,90,0.04)" : "#1a1825",
+    border: focusedField === fieldId
+      ? "1px solid rgba(184,151,90,0.7)"
+      : "1px solid rgba(184,151,90,0.2)",
     borderRadius: "1px",
     padding: "0.85rem 1rem",
     color: "rgba(250,250,248,0.85)",
@@ -88,9 +92,10 @@ export default function ContactPage() {
     fontWeight: 300,
     fontSize: "0.95rem",
     outline: "none",
-    transition: "border-color 0.2s",
+    transition: "border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease",
+    boxShadow: focusedField === fieldId ? "0 0 0 3px rgba(184,151,90,0.08)" : "none",
     colorScheme: "dark",
-  } as React.CSSProperties;
+  });
 
   const labelStyle = {
     display: "block",
@@ -107,7 +112,7 @@ export default function ContactPage() {
       {/* ── Page Hero ── */}
       <section
         className="hero-bg noise-overlay"
-        style={{ paddingTop: "8rem", paddingBottom: "5rem" }}
+        style={{ paddingTop: "10rem", paddingBottom: "5rem" }}
       >
         <div className="container mx-auto px-6">
           <span className="section-label reveal">Contact</span>
@@ -152,46 +157,85 @@ export default function ContactPage() {
             }}
           >
             {/* Multi-step form */}
-            <div className="card-luxury" style={{ padding: "2.5rem" }}>
-              {/* Step indicator */}
+            <div className="card-luxury" style={{ padding: "2.5rem", overflow: "visible" }}>
+              {/* Premium step indicator */}
               <div
                 style={{
                   display: "flex",
-                  gap: "0.5rem",
-                  marginBottom: "2rem",
-                  flexWrap: "wrap",
+                  alignItems: "center",
+                  marginBottom: "2.5rem",
+                  gap: "0",
                 }}
               >
-                {steps.map((s) => (
-                  <div
-                    key={s.n}
-                    style={{
-                      flex: 1,
-                      minWidth: "40px",
-                      height: "3px",
-                      background:
-                        s.n <= step
-                          ? "#b8975a"
-                          : "rgba(184,151,90,0.15)",
-                      borderRadius: "2px",
-                      transition: "background 0.3s",
-                    }}
-                  />
+                {steps.map((s, i) => (
+                  <div key={s.n} style={{ display: "flex", alignItems: "center", flex: i < steps.length - 1 ? 1 : "none" }}>
+                    {/* Circle */}
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.3rem", flexShrink: 0 }}>
+                      <div
+                        style={{
+                          width: "2rem",
+                          height: "2rem",
+                          borderRadius: "50%",
+                          border: s.n < step
+                            ? "1px solid #b8975a"
+                            : s.n === step
+                            ? "1px solid #b8975a"
+                            : "1px solid rgba(184,151,90,0.22)",
+                          background: s.n < step
+                            ? "#b8975a"
+                            : s.n === step
+                            ? "rgba(184,151,90,0.12)"
+                            : "transparent",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          transition: "all 0.4s ease",
+                          flexShrink: 0,
+                        }}
+                      >
+                        {s.n < step ? (
+                          <svg viewBox="0 0 12 12" fill="none" style={{ width: "0.65rem", height: "0.65rem" }}>
+                            <polyline points="1.5,6 5,9.5 10.5,2.5" stroke="#07060a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        ) : (
+                          <span style={{ fontFamily: "var(--font-body)", fontSize: "0.6rem", fontWeight: 500, color: s.n === step ? "#b8975a" : "rgba(184,151,90,0.4)", letterSpacing: "0.02em" }}>
+                            {String(s.n).padStart(2, "0")}
+                          </span>
+                        )}
+                      </div>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-body)",
+                          fontSize: "0.52rem",
+                          letterSpacing: "0.12em",
+                          textTransform: "uppercase",
+                          color: s.n === step ? "#b8975a" : s.n < step ? "rgba(184,151,90,0.55)" : "rgba(250,250,248,0.2)",
+                          whiteSpace: "nowrap",
+                          transition: "color 0.4s ease",
+                          fontWeight: s.n === step ? 500 : 300,
+                        }}
+                      >
+                        {s.label}
+                      </span>
+                    </div>
+                    {/* Connector line */}
+                    {i < steps.length - 1 && (
+                      <div
+                        style={{
+                          flex: 1,
+                          height: "1px",
+                          margin: "-1rem 0.35rem 0",
+                          background: s.n < step
+                            ? "rgba(184,151,90,0.5)"
+                            : "rgba(184,151,90,0.12)",
+                          transition: "background 0.4s ease",
+                        }}
+                      />
+                    )}
+                  </div>
                 ))}
               </div>
 
-              <p
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "0.78rem",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "#b8975a",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                Step {step} of 5 — {steps[step - 1]?.label}
-              </p>
               <h2
                 style={{
                   fontFamily: "var(--font-heading)",
@@ -201,7 +245,8 @@ export default function ContactPage() {
                   lineHeight: 1.2,
                 }}
               >
-                Qualification Form
+                Tell Us About
+                <em style={{ color: "#b8975a", fontStyle: "italic" }}> Your Space</em>
               </h2>
 
               {status === "success" && (
@@ -225,19 +270,29 @@ export default function ContactPage() {
               <form style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                 {step === 1 && (
                   <div>
-                    <label htmlFor="property" style={labelStyle}>Property Type</label>
-                    <select
-                      id="property"
-                      style={inputStyle}
-                      value={formData.propertyType}
-                      onChange={(e) => updateField("propertyType", e.target.value)}
-                    >
-                      <option>2BHK Apartment</option>
-                      <option>3BHK Apartment</option>
-                      <option>Penthouse</option>
-                      <option>Villa</option>
-                      <option>Office Space</option>
-                    </select>
+                    <label style={labelStyle}>Property Type</label>
+                    <div style={{ position: "relative" }}>
+                      <button
+                        type="button"
+                        onClick={() => setOpenDropdown(openDropdown === "property" ? "" : "property")}
+                        style={{ ...inputStyle("property"), display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", textAlign: "left" }}
+                      >
+                        <span>{formData.propertyType}</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" strokeWidth="1.5" style={{ width: "1rem", height: "1rem", flexShrink: 0, transition: "transform 0.3s", transform: openDropdown === "property" ? "rotate(180deg)" : "none" }}><path d="m6 9 6 6 6-6"/></svg>
+                      </button>
+                      {openDropdown === "property" && (
+                        <div style={{ position: "absolute", top: "calc(100% + 4px)", left: 0, right: 0, background: "#13111e", border: "1px solid rgba(184,151,90,0.25)", zIndex: 100, overflow: "hidden" }}>
+                          {["2BHK Apartment","3BHK Apartment","Penthouse","Villa","Office Space"].map((opt) => (
+                            <button key={opt} type="button"
+                              onClick={() => { updateField("propertyType", opt); setOpenDropdown(""); }}
+                              style={{ display: "block", width: "100%", textAlign: "left", padding: "0.75rem 1rem", fontFamily: "var(--font-body)", fontSize: "0.92rem", fontWeight: 300, color: formData.propertyType === opt ? "#b8975a" : "rgba(250,250,248,0.75)", background: formData.propertyType === opt ? "rgba(184,151,90,0.08)" : "transparent", border: "none", cursor: "pointer", borderBottom: "1px solid rgba(184,151,90,0.06)", transition: "background 0.2s" }}
+                              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(184,151,90,0.1)"; }}
+                              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = formData.propertyType === opt ? "rgba(184,151,90,0.08)" : "transparent"; }}
+                            >{opt}</button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
 
@@ -246,43 +301,69 @@ export default function ContactPage() {
                     <label htmlFor="location" style={labelStyle}>Location</label>
                     <input
                       id="location"
-                      style={inputStyle}
+                      style={inputStyle("location")}
                       placeholder="Mumbai / Navi Mumbai / Thane"
                       value={formData.location}
                       onChange={(e) => updateField("location", e.target.value)}
+                      onFocus={() => setFocusedField("location")}
+                      onBlur={() => setFocusedField("")}
                     />
                   </div>
                 )}
 
                 {step === 3 && (
                   <div>
-                    <label htmlFor="budget" style={labelStyle}>Budget Range</label>
-                    <select
-                      id="budget"
-                      style={inputStyle}
-                      value={formData.budgetRange}
-                      onChange={(e) => updateField("budgetRange", e.target.value)}
-                    >
-                      <option>₹5L – ₹8L</option>
-                      <option>₹8L – ₹12L</option>
-                      <option>₹12L – ₹15L+</option>
-                    </select>
+                    <label style={labelStyle}>Budget Range</label>
+                    <div style={{ position: "relative" }}>
+                      <button
+                        type="button"
+                        onClick={() => setOpenDropdown(openDropdown === "budget" ? "" : "budget")}
+                        style={{ ...inputStyle("budget"), display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", textAlign: "left" }}
+                      >
+                        <span>{formData.budgetRange}</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" strokeWidth="1.5" style={{ width: "1rem", height: "1rem", flexShrink: 0, transition: "transform 0.3s", transform: openDropdown === "budget" ? "rotate(180deg)" : "none" }}><path d="m6 9 6 6 6-6"/></svg>
+                      </button>
+                      {openDropdown === "budget" && (
+                        <div style={{ position: "absolute", top: "calc(100% + 4px)", left: 0, right: 0, background: "#13111e", border: "1px solid rgba(184,151,90,0.25)", zIndex: 100, overflow: "hidden" }}>
+                          {["₹5L – ₹8L","₹8L – ₹12L","₹12L – ₹15L+","₹20L+"].map((opt) => (
+                            <button key={opt} type="button"
+                              onClick={() => { updateField("budgetRange", opt); setOpenDropdown(""); }}
+                              style={{ display: "block", width: "100%", textAlign: "left", padding: "0.75rem 1rem", fontFamily: "var(--font-body)", fontSize: "0.92rem", fontWeight: 300, color: formData.budgetRange === opt ? "#b8975a" : "rgba(250,250,248,0.75)", background: formData.budgetRange === opt ? "rgba(184,151,90,0.08)" : "transparent", border: "none", cursor: "pointer", borderBottom: "1px solid rgba(184,151,90,0.06)", transition: "background 0.2s" }}
+                              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(184,151,90,0.1)"; }}
+                              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = formData.budgetRange === opt ? "rgba(184,151,90,0.08)" : "transparent"; }}
+                            >{opt}</button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
 
                 {step === 4 && (
                   <div>
-                    <label htmlFor="timeline" style={labelStyle}>Preferred Timeline</label>
-                    <select
-                      id="timeline"
-                      style={inputStyle}
-                      value={formData.timeline}
-                      onChange={(e) => updateField("timeline", e.target.value)}
-                    >
-                      <option>Within 30 Days</option>
-                      <option>Within 60 Days</option>
-                      <option>Within 90 Days</option>
-                    </select>
+                    <label style={labelStyle}>Preferred Timeline</label>
+                    <div style={{ position: "relative" }}>
+                      <button
+                        type="button"
+                        onClick={() => setOpenDropdown(openDropdown === "timeline" ? "" : "timeline")}
+                        style={{ ...inputStyle("timeline"), display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", textAlign: "left" }}
+                      >
+                        <span>{formData.timeline}</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" strokeWidth="1.5" style={{ width: "1rem", height: "1rem", flexShrink: 0, transition: "transform 0.3s", transform: openDropdown === "timeline" ? "rotate(180deg)" : "none" }}><path d="m6 9 6 6 6-6"/></svg>
+                      </button>
+                      {openDropdown === "timeline" && (
+                        <div style={{ position: "absolute", top: "calc(100% + 4px)", left: 0, right: 0, background: "#13111e", border: "1px solid rgba(184,151,90,0.25)", zIndex: 100, overflow: "hidden" }}>
+                          {["Within 30 Days","Within 60 Days","Within 90 Days","3–6 Months"].map((opt) => (
+                            <button key={opt} type="button"
+                              onClick={() => { updateField("timeline", opt); setOpenDropdown(""); }}
+                              style={{ display: "block", width: "100%", textAlign: "left", padding: "0.75rem 1rem", fontFamily: "var(--font-body)", fontSize: "0.92rem", fontWeight: 300, color: formData.timeline === opt ? "#b8975a" : "rgba(250,250,248,0.75)", background: formData.timeline === opt ? "rgba(184,151,90,0.08)" : "transparent", border: "none", cursor: "pointer", borderBottom: "1px solid rgba(184,151,90,0.06)", transition: "background 0.2s" }}
+                              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(184,151,90,0.1)"; }}
+                              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = formData.timeline === opt ? "rgba(184,151,90,0.08)" : "transparent"; }}
+                            >{opt}</button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
 
@@ -291,10 +372,12 @@ export default function ContactPage() {
                     <label htmlFor="phone" style={labelStyle}>Phone Number</label>
                     <input
                       id="phone"
-                      style={inputStyle}
+                      style={inputStyle("phone")}
                       placeholder="+91 9X XXX XXXXX"
                       value={formData.phone}
                       onChange={(e) => updateField("phone", e.target.value)}
+                      onFocus={() => setFocusedField("phone")}
+                      onBlur={() => setFocusedField("")}
                     />
                   </div>
                 )}
@@ -361,49 +444,46 @@ export default function ContactPage() {
                 >
                   Quick Contact
                 </h3>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1rem",
-                  }}
-                >
-                  {[
-                    { icon: "📞", label: "Phone", value: "+91 99676 22281" },
-                    { icon: "💬", label: "WhatsApp", value: "Response in 5 minutes" },
-                    { icon: "🏢", label: "Studio", value: "Mumbai · Navi Mumbai · Thane" },
-                  ].map((c) => (
-                    <div
-                      key={c.label}
-                      style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start" }}
-                    >
-                      <span style={{ fontSize: "1.1rem", flexShrink: 0 }}>{c.icon}</span>
-                      <div>
-                        <p
-                          style={{
-                            fontFamily: "var(--font-body)",
-                            fontSize: "0.75rem",
-                            letterSpacing: "0.1em",
-                            textTransform: "uppercase",
-                            color: "rgba(250,250,248,0.35)",
-                            marginBottom: "0.2rem",
-                          }}
-                        >
-                          {c.label}
-                        </p>
-                        <p
-                          style={{
-                            fontFamily: "var(--font-body)",
-                            color: "rgba(250,250,248,0.7)",
-                            fontWeight: 300,
-                            fontSize: "0.9rem",
-                          }}
-                        >
-                          {c.value}
-                        </p>
-                      </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                  {/* Phone */}
+                  <a href="tel:+919967622281" style={{ display: "flex", gap: "1rem", alignItems: "flex-start", textDecoration: "none" }} className="group">
+                    <div style={{ width: "2.25rem", height: "2.25rem", border: "1px solid rgba(184,151,90,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "border-color 0.3s, background 0.3s" }}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" strokeWidth="1.6" style={{ width: "1rem", height: "1rem" }}>
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                      </svg>
                     </div>
-                  ))}
+                    <div>
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(250,250,248,0.3)", marginBottom: "0.2rem" }}>Phone</p>
+                      <p style={{ fontFamily: "var(--font-body)", color: "rgba(250,250,248,0.75)", fontWeight: 300, fontSize: "0.9rem" }}>+91 99676 22281</p>
+                    </div>
+                  </a>
+
+                  {/* WhatsApp */}
+                  <a href="https://wa.me/919967622281" target="_blank" rel="noreferrer" style={{ display: "flex", gap: "1rem", alignItems: "flex-start", textDecoration: "none" }}>
+                    <div style={{ width: "2.25rem", height: "2.25rem", border: "1px solid rgba(184,151,90,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <svg viewBox="0 0 24 24" fill="#b8975a" style={{ width: "1rem", height: "1rem" }}>
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(250,250,248,0.3)", marginBottom: "0.2rem" }}>WhatsApp</p>
+                      <p style={{ fontFamily: "var(--font-body)", color: "rgba(250,250,248,0.75)", fontWeight: 300, fontSize: "0.9rem" }}>Reply within 5 minutes</p>
+                    </div>
+                  </a>
+
+                  {/* Studio */}
+                  <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                    <div style={{ width: "2.25rem", height: "2.25rem", border: "1px solid rgba(184,151,90,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" strokeWidth="1.6" style={{ width: "1rem", height: "1rem" }}>
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(250,250,248,0.3)", marginBottom: "0.2rem" }}>Studio</p>
+                      <p style={{ fontFamily: "var(--font-body)", color: "rgba(250,250,248,0.75)", fontWeight: 300, fontSize: "0.9rem" }}>Mumbai · Navi Mumbai · Thane</p>
+                    </div>
+                  </div>
                 </div>
                 <a
                   href="https://wa.me/919967622281"
@@ -599,3 +679,4 @@ export default function ContactPage() {
     </main>
   );
 }
+
